@@ -61,3 +61,15 @@ application-dev.properties
 # Testes
 ############################################
 coverage/
+
+################################################
+# Pastas de upload — arquivos gerados em runtime
+################################################
+uploads/photos/*
+uploads/qrcodes/*
+
+######################################################
+# Mantém a estrutura de pastas mas ignora os arquivos
+######################################################
+!uploads/photos/.gitkeep
+!uploads/qrcodes/.gitkeep
