@@ -48,7 +48,8 @@ Desktop.ini
 # Arquivos sensíveis / ambiente
 ############################################
 .env
-.env.*
+.env.local
+.env.dev
 application-local.properties
 application-dev.properties
 ############################################
