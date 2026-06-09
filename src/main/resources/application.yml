@@ -1,0 +1,60 @@
+spring:
+  application:
+    name: credenciamento-backend
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/credenciamento
+    username: credenciamento
+    password: credenciamento123
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      connection-timeout: 30000
+
+  jpa:
+    hibernate:
+      ddl-auto: validate          # Flyway cuida do schema
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 15MB
+
+# ── JWT ────────────────────────────────────────────────────────────────
+jwt:
+  secret: ${JWT_SECRET:dev-secret-key-minimo-256-bits-trocar-em-producao-obrigatorio}
+  expiration: 900000             # 15 minutos
+  refresh-expiration: 604800000  # 7 dias
+
+# ── Storage de arquivos ────────────────────────────────────────────────
+storage:
+  upload-dir: ${UPLOAD_DIR:./uploads}
+  qrcode-dir: ${QRCODE_DIR:./uploads/qrcodes}
+  photo-dir:  ${PHOTO_DIR:./uploads/photos}
+
+# ── OpenAPI ────────────────────────────────────────────────────────────
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+
+# ── CORS ───────────────────────────────────────────────────────────────
+cors:
+  allowed-origins: ${CORS_ORIGINS:http://localhost:4200}
+
+server:
+  port: 8080
+  error:
+    include-message: always
